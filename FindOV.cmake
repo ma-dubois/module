@@ -1,0 +1,20 @@
+set(OVPATHS $ENV{OV_PATH} $ENV{CPATH} $ENV{C_INCLUDE_PATH} $ENV{CPLUS_INCLUDE_PATH} $ENV{OBJC_INCLUDE_PATH} $ENV{LIBRARY_PATH} $ENV{LD_LIBRARY_PATH})
+
+file(TO_CMAKE_PATH "${OVPATHS}" OVPATHS)
+
+set(OVPATHS ${OVPATHS} ${CMAKE_SOURCE_DIR}/_EXTERNAL/OV/build/)
+
+find_library(	OV_LIBRARY NAME libov.a
+		PATHS ${OVPATHS}
+		)
+
+
+
+set(OV_LIBRARY1 ${OV_LIBRARY} )
+set(OV_LIBRARY2	"gfortran")
+
+set(OV_LIBRARY ${OV_LIBRARY1} ${OV_LIBRARY2})
+
+find_package_handle_standard_args(OV  DEFAULT_MSG
+                                  OV_LIBRARY)
+mark_as_advanced(OV_LIBRARY )
